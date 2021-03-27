@@ -7,9 +7,10 @@
         xmlns:local="clr-namespace:NoteKeeper"
         xmlns:system="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
+        d:DataContext="{d:DesignInstance local:ViewModel}"
         ResizeMode="NoResize"
         WindowStyle="None"
-        Title="MainWindow" Height="450" Width="800" MouseDown="Window_MouseDown">
+        Title="MainWindow" Height="450" Width="791" MouseDown="Window_MouseDown">
     <Window.Resources>
         <Style TargetType="{x:Type TextBlock}">
             <Setter Property="Padding" Value="5"/>
@@ -17,18 +18,44 @@
         </Style>
         <system:Double x:Key="IconSize">24</system:Double>
     </Window.Resources>
-    <Border BorderBrush="{DynamicResource MaterialDesignTextBoxBorder}"
-            BorderThickness="2">
-        <TabControl
+    <GroupBox>
+        <GroupBox.Header>
+            <DockPanel>
+                <Button DockPanel.Dock="Right"
+                        Style="{StaticResource MaterialDesignRaisedButton}"
+                        Padding="4"
+                        Background="Crimson"
+                        Margin="2">
+                    <materialDesign:PackIcon
+                        Kind="WindowClose"
+                        Height="{StaticResource IconSize}"
+                        Width="{StaticResource IconSize}" />
+                </Button>
+                <Button HorizontalAlignment="Right"
+                        Style="{StaticResource MaterialDesignRaisedButton}"
+                        Padding="4"
+                        Background="White"
+                        Foreground="Black"
+                        Margin="2">
+                    <materialDesign:PackIcon
+                        Kind="Minus"
+                        Height="{StaticResource IconSize}"
+                        Width="{StaticResource IconSize}" />
+                </Button>
+            </DockPanel>
+        </GroupBox.Header>
+        <Border BorderBrush="{DynamicResource MaterialDesignTextBoxBorder}"
+                BorderThickness="2">
+            <TabControl
         Style="{StaticResource MaterialDesignNavigatilRailTabControl}"
         materialDesign:ColorZoneAssist.Mode="SecondaryMid">
-            <TabItem
+                <TabItem
             Header="{materialDesign:PackIcon Kind=Note, Size=24}"
             Style="{StaticResource MaterialDesignNavigationRailTabItem}">
-                <StackPanel Orientation="Vertical">
-                    <StackPanel Orientation="Horizontal"
+                    <StackPanel Orientation="Vertical">
+                        <StackPanel Orientation="Horizontal"
                                 Margin="10">
-                        <TextBox
+                            <TextBox
                         Style="{StaticResource MaterialDesignOutlinedTextBox}"
                         VerticalAlignment="Center"
                         Margin="5"
@@ -38,7 +65,7 @@
                         VerticalScrollBarVisibility="Auto"
                         materialDesign:HintAssist.Hint="Hint phrase"
                         Width="150"/>
-                        <TextBox
+                            <TextBox
                         Style="{StaticResource MaterialDesignOutlinedTextBox}"
                         VerticalAlignment="Top"
                         Margin="5"
@@ -47,72 +74,77 @@
                         TextWrapping="Wrap"
                         VerticalScrollBarVisibility="Auto"
                         materialDesign:HintAssist.Hint="Note"
-                        Width="480"/>
-                        <Button
+                        Width="460"/>
+                            <Button
                         Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"
                         ToolTip="MaterialDesignFloatingActionMiniAccentButton"
                         Margin="5">
-                            <materialDesign:PackIcon
+                                <materialDesign:PackIcon
                             Kind="Plus"
                             Height="{StaticResource IconSize}"
                             Width="{StaticResource IconSize}" />
-                        </Button>
-                    </StackPanel>
-                    <Separator />
-                    <Border Background="DimGray">
-
-                    </Border>
-                    <ItemsControl Padding="10">
-                        <StackPanel Orientation="Horizontal">
-                            <TextBox
-                                Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                                VerticalAlignment="Top"
-                                Height="50"
-                                Width="150"
-                                IsReadOnly="True"
-                                Margin="5"
-                                AcceptsReturn="True"
-                                TextWrapping="Wrap"
-                                VerticalScrollBarVisibility="Auto"
-                                Text="Test1"/>
-                            <TextBox
-                                Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                                VerticalAlignment="Top"
-                                Height="50"
-                                Width="480"
-                                Margin="5"
-                                IsReadOnly="True"
-                                AcceptsReturn="True"
-                                TextWrapping="Wrap"
-                                VerticalScrollBarVisibility="Auto"
-                                Text="Test2"/>
-                            <Button
-                                Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
-                                ToolTip="MaterialDesignFloatingActionMiniLightButton"
-                                Margin="5">
-                                <materialDesign:PackIcon
-                                    Kind="ContentCopy"
-                                    Height="{StaticResource IconSize}"
-                                    Width="{StaticResource IconSize}" />
                             </Button>
                         </StackPanel>
-                    </ItemsControl>
-                </StackPanel>
-            </TabItem>
+                        <Separator />
+                        <Border Background="DimGray">
 
-            <TabItem
+                        </Border>
+                        <ItemsControl Padding="10">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBox
+                                            Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                            VerticalAlignment="Top"
+                                            Height="50"
+                                            Width="150"
+                                            IsReadOnly="True"
+                                            Margin="5"
+                                            AcceptsReturn="True"
+                                            TextWrapping="Wrap"
+                                            VerticalScrollBarVisibility="Auto"
+                                            Text="Test1"/>
+                                        <TextBox
+                                            Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                            VerticalAlignment="Top"
+                                            Height="50"
+                                            Width="460"
+                                            Margin="5"
+                                            IsReadOnly="True"
+                                            AcceptsReturn="True"
+                                            TextWrapping="Wrap"
+                                            VerticalScrollBarVisibility="Auto"
+                                            Text="Test2"/>
+                                        <Button
+                                            Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
+                                            ToolTip="MaterialDesignFloatingActionMiniLightButton"
+                                            Margin="5">
+                                            <materialDesign:PackIcon
+                                                Kind="ContentCopy"
+                                                Height="{StaticResource IconSize}"
+                                                Width="{StaticResource IconSize}" />
+                                        </Button>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </StackPanel>
+                </TabItem>
+
+                <TabItem
             Header="{materialDesign:PackIcon Kind=Settings, Size=24}"
             Style="{StaticResource MaterialDesignNavigationRailTabItem}">
-                <TextBlock>
+                    <TextBlock>
                 <Run Text="tab 2 content. Default look and behaviors."/>
                 <LineBreak/>
                 <LineBreak/>
                 <Run FontStyle="Italic">
                     Praesent sed dui arcu. Vivamus porta auctor sagittis
                 </Run>
-                </TextBlock>
-            </TabItem>
-        </TabControl>
-    </Border>
-    
+                    </TextBlock>
+                </TabItem>
+            </TabControl>
+        </Border>
+    </GroupBox>
+
 </Window>
