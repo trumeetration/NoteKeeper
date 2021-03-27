@@ -20,14 +20,19 @@ namespace NoteKeeper
     /// </summary>
     public partial class MainWindow : Window
     {
+        private ViewModel _viewModel;
         public MainWindow()
         {
+            DataContext = _viewModel = new ViewModel();
             InitializeComponent();
         }
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            DragMove();
+            if (e.LeftButton == MouseButtonState.Pressed)
+            {
+                DragMove();
+            }
         }
     }
 }
