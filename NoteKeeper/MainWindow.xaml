@@ -57,6 +57,7 @@
                                 Margin="10">
                             <TextBox
                         Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                        Text="{Binding HintPhrase, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                         VerticalAlignment="Center"
                         Margin="5"
                         Height="50"
@@ -67,6 +68,7 @@
                         Width="150"/>
                             <TextBox
                         Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                        Text="{Binding Note, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                         VerticalAlignment="Top"
                         Margin="5"
                         Height="50"
@@ -78,7 +80,8 @@
                             <Button
                         Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"
                         ToolTip="MaterialDesignFloatingActionMiniAccentButton"
-                        Margin="5">
+                        Margin="5"
+                        Command="{Binding AddNote}">
                                 <materialDesign:PackIcon
                             Kind="Plus"
                             Height="{StaticResource IconSize}"
@@ -89,7 +92,8 @@
                         <Border Background="DimGray">
 
                         </Border>
-                        <ItemsControl Padding="10">
+                        <ItemsControl Padding="10"
+                                      ItemsSource="{Binding TextNoteCollection}">
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal">
