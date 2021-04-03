@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace NoteKeeper
@@ -54,6 +55,15 @@ namespace NoteKeeper
                     Key = HintPhrase,
                     Value = Note
                 });
+                Note = HintPhrase = string.Empty;
+            }, () => true);
+        }
+
+        public ICommand CloseApp
+        {
+            get => new RelayCommand(() =>
+            {
+                Application.Current.Shutdown();
             }, () => true);
         }
     }
