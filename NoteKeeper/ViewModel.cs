@@ -9,16 +9,19 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using NoteKeeper.Interfaces;
+using Notifications.Wpf;
 
 namespace NoteKeeper
 {
     class ViewModel : BaseViewModel
     {
         public IMemory TextNoteStorage { get; }
+        public NotificationManager NotifyManager;
 
         public ViewModel()
         {
             TextNoteStorage = new TextNotesDB();
+            NotifyManager = new NotificationManager();
         }
 
         private string _note;
@@ -81,6 +84,20 @@ namespace NoteKeeper
             get => new RelayCommand<TextBox>(x =>
             {
                 TextNoteStorage.Remove((int)x.Tag);
+            }, x => true);
+        }
+
+        public ICommand CopyToClipBoard
+        {
+            get => new RelayCommand<TextBox>(x =>
+            {
+                Clipboard.SetText(x.Text);
+                NotifyManager.Show(new NotificationContent
+                {
+                    Title = "Copied",
+                    Message = "Note has been copied to clipboard",
+                    Type = NotificationType.Information
+                });
             }, x => true);
         }
     }
