@@ -6,18 +6,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
+using NoteKeeper.Interfaces;
 
 namespace NoteKeeper
 {
     class ViewModel : BaseViewModel
     {
-
-        public ObservableCollection<TextNote> TextNoteCollection { get; set; }
+        public IMemory TextNoteStorage { get; }
 
         public ViewModel()
         {
-            TextNoteCollection = new ObservableCollection<TextNote>();
+            TextNoteStorage = new TextNotesDB();
         }
 
         private string _note;
@@ -51,7 +52,7 @@ namespace NoteKeeper
         {
             get => new RelayCommand(() => 
             {
-                TextNoteCollection.Add(new TextNote() {
+                TextNoteStorage.Add(new TextNote() {
                     Key = HintPhrase,
                     Value = Note
                 });
@@ -65,6 +66,22 @@ namespace NoteKeeper
             {
                 Application.Current.Shutdown();
             }, () => true);
+        }
+
+        public ICommand MinimizeApp
+        {
+            get => new RelayCommand(() =>
+            {
+                Application.Current.MainWindow.WindowState = WindowState.Minimized;
+            }, () => true);
+        }
+
+        public ICommand DeleteNote
+        {
+            get => new RelayCommand<TextBox>(x =>
+            {
+                TextNoteStorage.Remove((int)x.Tag);
+            }, x => true);
         }
     }
 

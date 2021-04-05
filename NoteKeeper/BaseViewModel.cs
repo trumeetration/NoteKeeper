@@ -9,6 +9,7 @@ namespace NoteKeeper
 {
     class BaseViewModel : INotifyPropertyChanged
     {
+
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged(string propertyName)
         {
