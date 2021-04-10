@@ -54,48 +54,48 @@
         <Border BorderBrush="{DynamicResource MaterialDesignTextBoxBorder}"
                 BorderThickness="2">
             <TabControl
-        Style="{StaticResource MaterialDesignNavigatilRailTabControl}"
-        materialDesign:ColorZoneAssist.Mode="SecondaryMid">
+                Style="{StaticResource MaterialDesignNavigatilRailTabControl}"
+                materialDesign:ColorZoneAssist.Mode="SecondaryMid">
                 <TabItem
-            Header="{materialDesign:PackIcon Kind=Note, Size=24}"
-            Style="{StaticResource MaterialDesignNavigationRailTabItem}">
+                    Header="{materialDesign:PackIcon Kind=Note, Size=24}"
+                    Style="{StaticResource MaterialDesignNavigationRailTabItem}">
                     <StackPanel Orientation="Vertical" MaxHeight="381">
                         <StackPanel Orientation="Horizontal"
                                 Margin="10">
                             <TextBox
-                        Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                        Text="{Binding HintPhrase, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                        VerticalAlignment="Top"
-                        Margin="5"
-                        Padding="5,10,5,0"
-                        Height="40"
-                        AcceptsReturn="True"
-                        TextWrapping="Wrap"
-                        VerticalScrollBarVisibility="Auto"
-                        materialDesign:HintAssist.Hint="Hint phrase"
-                        Width="130"/>
+                                Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                Text="{Binding HintPhrase, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                VerticalAlignment="Top"
+                                Margin="5"
+                                Padding="5,10,5,0"
+                                Height="40"
+                                AcceptsReturn="True"
+                                TextWrapping="Wrap"
+                                VerticalScrollBarVisibility="Auto"
+                                materialDesign:HintAssist.Hint="Hint phrase"
+                                Width="130"/>
                             <TextBox
-                        Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                        Text="{Binding Note, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                        VerticalAlignment="Top"
-                        Margin="5"
-                        Padding="5,10,5,0"
-                        MinHeight="40"
-                        MaxHeight="150"
-                        AcceptsReturn="True"
-                        TextWrapping="Wrap"
-                        VerticalScrollBarVisibility="Auto"
-                        materialDesign:HintAssist.Hint="Note"
-                        Width="460"/>
+                                Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                Text="{Binding Note, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                VerticalAlignment="Top"
+                                Margin="5"
+                                Padding="5,10,5,0"
+                                MinHeight="40"
+                                MaxHeight="150"
+                                AcceptsReturn="True"
+                                TextWrapping="Wrap"
+                                VerticalScrollBarVisibility="Auto"
+                                materialDesign:HintAssist.Hint="Note"
+                                Width="460"/>
                             <Button
-                        Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"
-                        Margin="5"
-                        Command="{Binding AddNote}"
-                        Height="30" Width="30">
+                                Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"
+                                Margin="5"
+                                Command="{Binding AddNote}"
+                                Height="30" Width="30">
                                 <materialDesign:PackIcon
-                            Kind="Plus"
-                            Height="{StaticResource IconSize}"
-                            Width="{StaticResource IconSize}" />
+                                    Kind="Plus"
+                                    Height="{StaticResource IconSize}"
+                                    Width="{StaticResource IconSize}" />
                             </Button>
                         </StackPanel>
                         <Separator />
@@ -109,35 +109,34 @@
                                     <DataTemplate>
                                         <StackPanel Orientation="Horizontal">
                                             <TextBox
-                                            Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                                            VerticalAlignment="Top"
-                                            Height="35"
-                                            Width="130"
-                                            IsReadOnly="True"
-                                            Margin="5"
-                                            Padding="5"
-                                            VerticalContentAlignment="Center"
-                                            AcceptsReturn="True"
-                                            TextWrapping="Wrap"
-                                            VerticalScrollBarVisibility="Auto"
-                                            Text="{Binding Key}"/>
+                                                Name="NoteHintTextBox"
+                                                Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                                VerticalAlignment="Top"
+                                                Height="35"
+                                                Width="130"
+                                                IsReadOnly="True"
+                                                Margin="5"
+                                                Padding="5"
+                                                VerticalContentAlignment="Center"
+                                                AcceptsReturn="True"
+                                                TextWrapping="Wrap"
+                                                VerticalScrollBarVisibility="Auto"
+                                                Text="{Binding Key}"/>
                                             <TextBox
-                                            Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                                            Name="NoteValueTextBox"
-                                            VerticalAlignment="Top"
-                                            MinHeight="35"
-                                            MaxHeight="150"
-                                            Width="430"
-                                            Margin="5"
-                                            Padding="5"
-                                            VerticalContentAlignment="Center"
-                                            IsReadOnly="True"
-                                            AcceptsReturn="True"
-                                            TextWrapping="Wrap"
-                                            VerticalScrollBarVisibility="Auto"
-                                            Text="{Binding Value}"
-                                            Tag="{Binding Path=(ItemsControl.AlternationIndex),
-                                                         RelativeSource={RelativeSource TemplatedParent}}"/>
+                                                Name="NoteValueTextBox"
+                                                Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                                VerticalAlignment="Top"
+                                                MinHeight="35"
+                                                MaxHeight="150"
+                                                Width="430"
+                                                Margin="5"
+                                                Padding="5"
+                                                VerticalContentAlignment="Center"
+                                                IsReadOnly="True"
+                                                AcceptsReturn="True"
+                                                TextWrapping="Wrap"
+                                                VerticalScrollBarVisibility="Auto"
+                                                Text="{Binding Value}"/>
                                             <Button
                                                 Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
                                                 Margin="5"
@@ -158,7 +157,7 @@
                                                 Height="30"
                                                 DataContext="{Binding ElementName=MainWindoww, Path=DataContext}"
                                                 Command="{Binding DeleteNote}"
-                                                CommandParameter="{Binding ElementName=NoteValueTextBox, Path=.}">
+                                                CommandParameter="{Binding ElementName=NoteHintTextBox, Path=.}">
                                                 <materialDesign:PackIcon
                                                     Kind="DeleteForeverOutline"
                                                     Height="20"

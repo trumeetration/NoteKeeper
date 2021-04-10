@@ -12,7 +12,7 @@ namespace NoteKeeper.Interfaces
         ObservableCollection<TextNote> Memory { get; }
         int Count { get; }
         void Add(TextNote textNote);
-        void Remove(int index);
+        void Remove(string hintValue);
 
     }
 }

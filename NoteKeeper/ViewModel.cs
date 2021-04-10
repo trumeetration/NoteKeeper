@@ -83,7 +83,7 @@ namespace NoteKeeper
         {
             get => new RelayCommand<TextBox>(x =>
             {
-                TextNoteStorage.Remove((int)x.Tag);
+                TextNoteStorage.Remove(x.Text);
             }, x => true);
         }
 

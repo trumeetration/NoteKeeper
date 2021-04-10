@@ -30,7 +30,8 @@ namespace NoteKeeper
                     {
                         command.CommandText =
                             @"CREATE TABLE text_notes (
-                                hint VARCHAR NOT NULL,
+                                hint  VARCHAR NOT NULL
+                                        UNIQUE ON CONFLICT IGNORE,
                                 value VARCHAR NOT NULL)";
                         command.CommandType = CommandType.Text;
                         command.ExecuteNonQuery();
@@ -75,18 +76,18 @@ namespace NoteKeeper
             Memory.Add(textNote);
         }
 
-        public void Remove(int index)
+        public void Remove(string hintValue)
         {
             using (SQLiteConnection connection = new SQLiteConnection("Data Source = " + _dbName))
             {
                 connection.Open();
                 SQLiteCommand command = new SQLiteCommand(connection);
                 command.CommandText = @"DELETE FROM text_notes
-                                        WHERE rowid=@noteid";
-                command.Parameters.AddWithValue("@noteid", (index+1).ToString());
+                                        WHERE hint=@hintval";
+                command.Parameters.AddWithValue("@hintval", hintValue);
                 command.ExecuteNonQuery();
             }
-            Memory.RemoveAt(index);
+            Memory.Remove(Memory.Single(x => x.Key == hintValue));
         }
     }
 }
