@@ -13,15 +13,19 @@ using Notifications.Wpf;
 
 namespace NoteKeeper
 {
-    class ViewModel : BaseViewModel
+    class ViewModel : BaseViewModel, IDataErrorInfo
     {
         public IMemory TextNoteStorage { get; }
         public NotificationManager NotifyManager;
+        public Dictionary<string, string> ErrorCollection { get; }
 
         public ViewModel()
         {
             TextNoteStorage = new TextNotesDB();
             NotifyManager = new NotificationManager();
+            ErrorCollection = new Dictionary<string, string>();
+            ErrorCollection.Add("HintPhrase", null);
+            ErrorCollection.Add("Note", null);
         }
 
         private string _note;
@@ -99,6 +103,57 @@ namespace NoteKeeper
                     Type = NotificationType.Information
                 });
             }, x => true);
+        }
+
+        public string this[string columnName]
+        {
+            get
+            {
+                string result = null;
+                switch (columnName)
+                {
+                    case nameof(HintPhrase):
+                        if (TextNoteStorage.Contains(HintPhrase))
+                        {
+                            result = "Already exists";
+                        }
+                        else if (string.IsNullOrWhiteSpace(HintPhrase))
+                        {
+                            result = "Field is empty";
+                        }
+                        break;
+                    case nameof(Note):
+                        if (string.IsNullOrWhiteSpace(Note))
+                        {
+                            result = "Field is empty";
+                        }
+                        break;
+                }
+
+                if (ErrorCollection.ContainsKey(columnName) == false)
+                    ErrorCollection.Add(columnName, result);
+                else
+                    ErrorCollection[columnName] = result;
+                OnPropertyChanged(nameof(ErrorCollection));
+                IsAddAvailable = ErrorCollection[nameof(HintPhrase)] == null && ErrorCollection[nameof(Note)] == null;
+                return result;
+            }
+        }
+
+        public string Error { get; }
+
+        private bool _isAddAvailable;
+        public bool IsAddAvailable
+        {
+            get => _isAddAvailable;
+            set
+            {
+                if (_isAddAvailable != value)
+                {
+                    _isAddAvailable = value;
+                    OnPropertyChanged(nameof(IsAddAvailable));
+                }
+            }
         }
     }
 

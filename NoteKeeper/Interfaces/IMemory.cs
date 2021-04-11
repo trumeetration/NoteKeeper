@@ -14,5 +14,6 @@ namespace NoteKeeper.Interfaces
         void Add(TextNote textNote);
         void Remove(string hintValue);
 
+        bool Contains(string hintPhrase);
     }
 }

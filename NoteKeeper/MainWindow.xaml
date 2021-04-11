@@ -64,7 +64,8 @@
                                 Margin="10">
                             <TextBox
                                 Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                                Text="{Binding HintPhrase, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                Text="{Binding HintPhrase, Mode=TwoWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+                                ToolTip="{Binding ErrorCollection[HintPhrase]}"
                                 VerticalAlignment="Top"
                                 Margin="5"
                                 Padding="5,10,5,0"
@@ -76,7 +77,8 @@
                                 Width="130"/>
                             <TextBox
                                 Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                                Text="{Binding Note, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                Text="{Binding Note, Mode=TwoWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+                                ToolTip="{Binding ErrorCollection[Note]}"
                                 VerticalAlignment="Top"
                                 Margin="5"
                                 Padding="5,10,5,0"
@@ -91,14 +93,15 @@
                                 Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"
                                 Margin="5"
                                 Command="{Binding AddNote}"
-                                Height="30" Width="30">
+                                Height="30" Width="30"
+                                IsEnabled="{Binding IsAddAvailable}">
                                 <materialDesign:PackIcon
                                     Kind="Plus"
                                     Height="{StaticResource IconSize}"
                                     Width="{StaticResource IconSize}" />
                             </Button>
                         </StackPanel>
-                        <Separator />
+                        <Separator Margin="0,5" />
                         <ScrollViewer VerticalScrollBarVisibility="Auto"
                                       MaxHeight="300">
                             <ItemsControl Padding="10"

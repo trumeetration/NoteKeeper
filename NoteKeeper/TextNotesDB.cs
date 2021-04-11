@@ -89,5 +89,7 @@ namespace NoteKeeper
             }
             Memory.Remove(Memory.Single(x => x.Key == hintValue));
         }
+
+        public bool Contains(string hintPhrase) => Memory.Any(x => x.Key == hintPhrase);
     }
 }
